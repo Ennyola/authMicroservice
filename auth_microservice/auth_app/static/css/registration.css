@@ -1,0 +1,29 @@
+h1 {
+    color: #3C4A93;
+    font-weight: 900;
+}
+
+form {
+    margin-top: 80px;
+}
+
+form [type="submit"] {
+    background-color: #FB6B46 !important;
+}
+
+.signup-option {
+    color: #3C4A93;
+}
+
+.login-option p {
+    color: #3C4A93;
+}
+
+.login-option p>a {
+    color: #FB6B46;
+}
+
+form h4 {
+    color: #3C4A93;
+    font-weight: bold;
+}
