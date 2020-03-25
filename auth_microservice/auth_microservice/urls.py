@@ -16,11 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from auth_app import views
+from graphene_django.views import GraphQLView
+from graphql_jwt.decorators import jwt_cookie
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage),
     path('auth/', include('auth_app.urls')),
-    path('auth-social/', include('social_django.urls', namespace='social'))
+    path('auth-social/', include('social_django.urls', namespace='social')), 
+    path('graphql/', jwt_cookie(GraphQLView.as_view(graphiql=True )))
 
 ]
