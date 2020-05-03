@@ -49,7 +49,9 @@ def user_login(request):
     user = authenticate(username = email, password = password)
     if user:
         login(request, user)
-        return redirect('auth_app:homepage')
+        return redirect( "http://127.0.0.1:3000/homepage")
+        "auth_app:homepage"
+        
     else:
         messages.error(request, "Invalid Login Credentials")
         return redirect('auth_app:login')

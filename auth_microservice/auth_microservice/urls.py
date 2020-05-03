@@ -18,7 +18,8 @@ from django.urls import path,include
 from auth_app import views
 from graphene_django.views import GraphQLView
 from graphql_jwt.decorators import jwt_cookie
-
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authtoken import views as auth_token_views
 
 
 urlpatterns = [
@@ -26,6 +27,7 @@ urlpatterns = [
     path('', views.homepage),
     path('auth/', include('auth_app.urls')),
     path('auth-social/', include('social_django.urls', namespace='social')), 
-    path('graphql/', jwt_cookie(GraphQLView.as_view(graphiql=True )))
+    path('graphiql/', csrf_exempt(jwt_cookie(GraphQLView.as_view(graphiql=True )))),
+    path('api-token-auth/', auth_token_views.obtain_auth_token, name = 'api-token-auth')
 
 ]
