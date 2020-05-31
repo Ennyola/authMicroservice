@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-
+from datetime import timedelta
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -91,15 +91,15 @@ REST_FRAMEWORK ={
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'auth_app',
-        'PASSWORD': '',
-        'USER': 'root',
-        'HOST':'localhost',
-        'PORT': ''
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'wivjngqv',
+        'USER': 'wivjngqv',
+        'PASSWORD': '8YTa8D7mSmKKsKMpOB8sZH-qEXfKgaWv',
+        'HOST':'raja.db.elephantsql.com',
     }
 }
 
+# cnx = mysql.connector.connect(user="<user>", password="<password>", host="SG-myCluster-2373-master.servers.mongodirector.com", port=3306, database="<your-database-name>")
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -176,6 +176,10 @@ GRAPHENE = {
         'graphql_jwt.middleware.JSONWebTokenMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware'
     ]
+}
+GRAPHQL_JWT= {
+    'JWT_VERIFY_EXPIRATION': True,
+    'JWT_EXPIRATION_DELTA': timedelta(minutes=5),
 }
 
 CORS_ORIGIN_WHITELIST = [

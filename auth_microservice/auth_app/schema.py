@@ -26,9 +26,9 @@ class CreateUser(graphene.Mutation):
 
     def mutate(self, info,email,username,password):
         if User.objects.filter(email = email ).exists():
-            raise Exception("email already exists")
+            raise Exception("Email already exists")
         elif User.objects.filter(username = username ).exists():
-            raise Exception("username Already exists")
+            raise Exception("Username already exists")
         else:
             user = User(email = email, username = username)
             user.set_password(password)
