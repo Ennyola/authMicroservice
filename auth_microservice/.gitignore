@@ -1,2 +1,4 @@
 .env
 venv
+Pipfile
+db.sqlite3
