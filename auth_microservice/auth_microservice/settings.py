@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 from datetime import timedelta
+
+import django_heroku
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social_django',
     'graphene_django',
     'corsheaders'
     
@@ -53,7 +55,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
 ROOT_URLCONF = 'auth_microservice.urls'
@@ -76,14 +77,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'auth_microservice.wsgi.application'
 
-REST_FRAMEWORK ={
-    'DEFAULT_AUTHENTICATION_CLASSES':(
-        'rest_framework.authentication.TokenAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES':(
-        'rest_framework.permissions.IsAuthenticated',
-    )
-}
 
 
 # Database
@@ -99,7 +92,6 @@ DATABASES = {
     }
 }
 
-# cnx = mysql.connector.connect(user="<user>", password="<password>", host="SG-myCluster-2373-master.servers.mongodirector.com", port=3306, database="<your-database-name>")
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -139,35 +131,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '619644441317-hgqao7irddd7cfc2us9l4hbje38avg9t.apps.googleusercontent.com'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'tEPYBaoGDpMrA40310m2cnLx'
 
 LOGIN_REDIRECT_URL = "/"
 
 AUTHENTICATION_BACKENDS = [
     'auth_app.customBackend.EmailAuthentication',
-    'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
-    'social_core.backends.google.GoogleOpenId',  # for Google authentication
-    'social_core.backends.google.GoogleOAuth2',  # for Google authentication
-    'social_core.backends.github.GithubOAuth2',  # for Github authentication
-    'social_core.backends.facebook.FacebookOAuth2',  # for Facebook authentication
     'django.contrib.auth.backends.ModelBackend',
     'graphql_jwt.backends.JSONWebTokenBackend',
 ]
 
-SOCIAL_AUTH_PIPELINE = (
-    'social_core.pipeline.social_auth.social_details',
-    'social_core.pipeline.social_auth.social_uid',
-    'social_core.pipeline.social_auth.auth_allowed',
-    'social_core.pipeline.social_auth.social_user',
-    'social_core.pipeline.user.get_username',
-    'social_core.pipeline.social_auth.associate_by_email',  # <--- enable this one
-    'social_core.pipeline.user.create_user',
-    'social_core.pipeline.social_auth.associate_user',
-    'social_core.pipeline.social_auth.load_extra_data',
-    'social_core.pipeline.user.user_details',
-)
 
 GRAPHENE = {
 
@@ -183,8 +156,8 @@ GRAPHQL_JWT= {
 }
 
 CORS_ORIGIN_WHITELIST = [
-    'http://127.0.0.1:3000',
-    'http://localhost:3000'
-
+    'https://awploder.herokuapp.com'
 ]
 
+# Activate Django-Heroku
+django_heroku.settings(locals())
