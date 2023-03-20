@@ -153,7 +153,7 @@ GRAPHQL_JWT = {
 
 CORS_ORIGIN_WHITELIST = [
     "https://awploder.herokuapp.com",
-    "https://awploder.netlify.app/",
+    "https://awploder.netlify.app",
 ]
 
 # Activate Django-Heroku
