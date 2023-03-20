@@ -10,10 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+import django_heroku
 import os
 from datetime import timedelta
 
-import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG")
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -151,7 +151,10 @@ GRAPHQL_JWT = {
     "JWT_EXPIRATION_DELTA": timedelta(minutes=5),
 }
 
-CORS_ORIGIN_WHITELIST = ["https://awploder.herokuapp.com", "https://awploder.netlify.app/"]
+CORS_ORIGIN_WHITELIST = [
+    "https://awploder.herokuapp.com",
+    "https://awploder.netlify.app/",
+]
 
 # Activate Django-Heroku
 django_heroku.settings(locals())
